@@ -1,4 +1,4 @@
-name: Refresh profile telemetry
+name: Refresh profile activity
 
 on:
   schedule:
@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: profile-telemetry
+  group: profile-activity
   cancel-in-progress: true
 
 jobs:
@@ -28,20 +28,20 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Generate live dashboard
+      - name: Generate activity dashboard
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROFILE_USERNAME: derishabl
         run: python scripts/generate_dashboard.py
 
-      - name: Publish refreshed telemetry
+      - name: Publish refreshed activity
         run: |
           if git diff --quiet -- assets/stats-dark.svg assets/stats-light.svg; then
-            echo "Telemetry is already current."
+            echo "Activity dashboard is already current."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/stats-dark.svg assets/stats-light.svg
-          git commit -m "chore: refresh profile telemetry [skip ci]"
+          git commit -m "chore: refresh profile activity [skip ci]"
           git push
