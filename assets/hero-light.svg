@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="460" viewBox="0 0 960 460" role="img" aria-labelledby="title desc">
+  <title id="title">Derishabl — make the invisible measurable</title>
+  <desc id="desc">A custom light signal-observatory banner with a pixel mascot and an animated retrieval map.</desc>
+
+  <defs>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9b3da8"/>
+      <stop offset="0.52" stop-color="#167b9c"/>
+      <stop offset="1" stop-color="#4d7c25"/>
+    </linearGradient>
+    <linearGradient id="scan" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#167b9c" stop-opacity="0"/>
+      <stop offset="1" stop-color="#167b9c" stop-opacity="0.2"/>
+    </linearGradient>
+    <radialGradient id="field" cx="50%" cy="50%" r="62%">
+      <stop offset="0" stop-color="#9b3da8" stop-opacity="0.09"/>
+      <stop offset="0.62" stop-color="#167b9c" stop-opacity="0.025"/>
+      <stop offset="1" stop-color="#f7f3f6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#d2c6d4" stroke-width="0.65" opacity="0.42"/>
+    </pattern>
+    <clipPath id="window">
+      <rect x="548" y="116" width="364" height="240" rx="16"/>
+    </clipPath>
+    <filter id="soft" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <filter id="tinyGlow" x="-150%" y="-150%" width="400%" height="400%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+    .sans { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .sweep { transform-origin: 730px 244px; animation: sweep 10s linear infinite; }
+    .pulse { transform-box: fill-box; transform-origin: center; animation: pulse 2.8s ease-in-out infinite; }
+    .blink { animation: blink 2.2s steps(2, end) infinite; }
+    .dash { stroke-dasharray: 4 7; animation: dash 12s linear infinite; }
+    @keyframes sweep { to { transform: rotate(360deg); } }
+    @keyframes pulse { 0%, 100% { opacity: .4; transform: scale(.78); } 50% { opacity: 1; transform: scale(1.18); } }
+    @keyframes blink { 50% { opacity: .28; } }
+    @keyframes dash { to { stroke-dashoffset: -110; } }
+    @media (prefers-reduced-motion: reduce) { .sweep, .pulse, .blink, .dash { animation: none; } }
+  </style>
+
+  <rect width="960" height="460" rx="28" fill="#f7f3f6"/>
+  <rect x="0.75" y="0.75" width="958.5" height="458.5" rx="27.25" fill="none" stroke="#d6cad8" stroke-width="1.5"/>
+  <path d="M28 1H270" stroke="url(#edge)" stroke-width="2"/>
+
+  <!-- Pixel mark, derived from the profile avatar -->
+  <g transform="translate(42 31)" fill="#9b3da8">
+    <rect x="0" y="0" width="9" height="9" rx="1"/>
+    <rect x="36" y="0" width="9" height="9" rx="1"/>
+    <rect x="9" y="9" width="9" height="9" rx="1"/>
+    <rect x="18" y="9" width="9" height="9" rx="1"/>
+    <rect x="27" y="9" width="9" height="9" rx="1"/>
+    <rect x="0" y="18" width="9" height="9" rx="1"/>
+    <rect x="18" y="18" width="9" height="9" rx="1"/>
+    <rect x="36" y="18" width="9" height="9" rx="1"/>
+    <rect x="9" y="27" width="9" height="9" rx="1"/>
+    <rect x="18" y="27" width="9" height="9" rx="1"/>
+    <rect x="27" y="27" width="9" height="9" rx="1"/>
+    <rect x="9" y="36" width="9" height="9" rx="1"/>
+    <rect x="27" y="36" width="9" height="9" rx="1"/>
+  </g>
+
+  <text x="105" y="48" class="mono" fill="#1d1720" font-size="15" font-weight="700" letter-spacing="2.7">DERISHABL</text>
+  <text x="105" y="68" class="mono" fill="#716776" font-size="10" letter-spacing="1.25">INSTRUMENTS FOR INVISIBLE SYSTEMS</text>
+
+  <g transform="translate(757 40)">
+    <circle cx="3" cy="9" r="3" fill="#4d7c25" class="blink"/>
+    <circle cx="3" cy="9" r="7" fill="#4d7c25" opacity="0.12" class="pulse"/>
+    <text x="17" y="12" class="mono" fill="#625967" font-size="10" letter-spacing="1.35">SIGNAL / ONLINE</text>
+  </g>
+  <path d="M36 92H924" stroke="#ddd3de"/>
+
+  <text x="48" y="127" class="mono" fill="#746a78" font-size="10" letter-spacing="2">SYSTEMS / SEARCH / EVIDENCE</text>
+  <text x="46" y="190" class="sans" fill="#18131a" font-size="55" font-weight="760" letter-spacing="-2.2">MAKE THE</text>
+  <text x="46" y="250" class="sans" fill="#9b3da8" font-size="55" font-weight="760" letter-spacing="-2.2">INVISIBLE</text>
+  <text x="46" y="310" class="sans" fill="#18131a" font-size="55" font-weight="760" letter-spacing="-2.2">MEASURABLE.</text>
+
+  <text x="50" y="343" class="mono" fill="#625967" font-size="12.5">I build small tools for systems that fail quietly.</text>
+
+  <g class="mono" font-size="9.5" letter-spacing="1.1">
+    <rect x="49" y="364" width="92" height="25" rx="12.5" fill="#9b3da8" fill-opacity="0.08" stroke="#9b3da8" stroke-opacity="0.36"/>
+    <text x="65" y="380" fill="#873393">RETRIEVAL</text>
+    <rect x="149" y="364" width="124" height="25" rx="12.5" fill="#167b9c" fill-opacity="0.07" stroke="#167b9c" stroke-opacity="0.3"/>
+    <text x="165" y="380" fill="#116d89">OBSERVABILITY</text>
+    <rect x="281" y="364" width="84" height="25" rx="12.5" fill="#4d7c25" fill-opacity="0.06" stroke="#4d7c25" stroke-opacity="0.28"/>
+    <text x="297" y="380" fill="#466f24">SYSTEMS</text>
+  </g>
+
+  <!-- Observation window -->
+  <rect x="548" y="116" width="364" height="240" rx="16" fill="#f0eaf0" stroke="#c9bdca"/>
+  <g clip-path="url(#window)">
+    <rect x="548" y="116" width="364" height="240" fill="url(#grid)"/>
+    <rect x="548" y="116" width="364" height="240" fill="url(#field)"/>
+    <circle cx="730" cy="244" r="55" fill="none" stroke="#aaa0ac" stroke-width="0.8" stroke-dasharray="3 7"/>
+    <circle cx="730" cy="244" r="100" fill="none" stroke="#c1b5c2" stroke-width="0.8" stroke-dasharray="3 8"/>
+    <path d="M730 244L730 132A112 112 0 0 1 786 147Z" fill="url(#scan)" class="sweep"/>
+    <line x1="730" y1="244" x2="730" y2="132" stroke="#167b9c" stroke-width="1" opacity="0.55" class="sweep"/>
+
+    <g fill="none" stroke="#9b3da8" stroke-width="0.8" opacity="0.26" class="dash">
+      <path d="M730 244L619 175M730 244L653 286M730 244L780 178M730 244L826 220M730 244L790 306M730 244L680 202"/>
+    </g>
+    <g fill="none" stroke="#c45143" stroke-width="1" opacity="0.34">
+      <path d="M780 178L835 159M780 178L854 202M780 178L826 220M780 178L746 155"/>
+    </g>
+
+    <!-- Quiet corpus points -->
+    <g fill="#9c91a0">
+      <circle cx="588" cy="151" r="2.5"/><circle cx="619" cy="175" r="3"/>
+      <circle cx="590" cy="235" r="2"/><circle cx="607" cy="303" r="2.5"/>
+      <circle cx="653" cy="286" r="3"/><circle cx="644" cy="213" r="2"/>
+      <circle cx="680" cy="202" r="3"/><circle cx="685" cy="323" r="2.5"/>
+      <circle cx="706" cy="154" r="2"/><circle cx="746" cy="155" r="2.5"/>
+      <circle cx="754" cy="332" r="2"/><circle cx="790" cy="306" r="3"/>
+      <circle cx="835" cy="159" r="2.5"/><circle cx="854" cy="202" r="2"/>
+      <circle cx="826" cy="220" r="3"/><circle cx="876" cy="274" r="2.5"/>
+      <circle cx="849" cy="326" r="2.5"/><circle cx="817" cy="270" r="2"/>
+      <circle cx="574" cy="279" r="2"/><circle cx="891" cy="141" r="2"/>
+    </g>
+    <g fill="#9b3da8" filter="url(#tinyGlow)">
+      <circle cx="619" cy="175" r="3"/><circle cx="653" cy="286" r="3"/>
+      <circle cx="680" cy="202" r="3"/><circle cx="790" cy="306" r="3"/>
+      <circle cx="826" cy="220" r="3"/>
+    </g>
+    <circle cx="780" cy="178" r="10" fill="#c45143" opacity="0.12" class="pulse"/>
+    <circle cx="780" cy="178" r="4.5" fill="#c45143" filter="url(#tinyGlow)"/>
+
+    <!-- Query point -->
+    <circle cx="730" cy="244" r="16" fill="#4d7c25" opacity="0.08" class="pulse"/>
+    <circle cx="730" cy="244" r="6" fill="#f7f3f6" stroke="#4d7c25" stroke-width="2" filter="url(#tinyGlow)"/>
+    <circle cx="730" cy="244" r="2" fill="#4d7c25"/>
+  </g>
+
+  <text x="566" y="139" class="mono" fill="#716776" font-size="9" letter-spacing="1.5">OBSERVATION WINDOW / 01</text>
+  <text x="566" y="340" class="mono" fill="#837887" font-size="8.5" letter-spacing="1.1">SCHEMATIC — NOT LIVE DATA</text>
+  <g class="mono" font-size="8.5" letter-spacing="0.75">
+    <path d="M784 174L820 151" stroke="#c45143" stroke-width="0.8"/>
+    <text x="825" y="151" fill="#b44337">HUB</text>
+    <path d="M851 326L868 310" stroke="#978c9a" stroke-width="0.8"/>
+    <text x="821" y="304" fill="#766c7a">UNSEEN</text>
+    <text x="740" y="262" fill="#466f24">QUERY</text>
+  </g>
+
+  <path d="M36 407H924" stroke="#ddd3de"/>
+  <g class="mono">
+    <text x="48" y="430" fill="#786e7b" font-size="9" letter-spacing="1.4">CURRENT SIGNAL</text>
+    <circle cx="164" cy="427" r="2.5" fill="#9b3da8"/>
+    <text x="176" y="431" fill="#312a33" font-size="11">retrieval-fairness</text>
+    <text x="312" y="431" fill="#706875" font-size="10">/ exposure audits for vector search &amp; RAG</text>
+    <text x="849" y="431" fill="#706875" font-size="9" letter-spacing="1">PY · C++</text>
+  </g>
+</svg>
