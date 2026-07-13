@@ -52,7 +52,6 @@ PALETTES = {
         "rule": "#25292c",
         "idle": "#24282b",
         "levels": ["#41474c", "#666d72", "#9ba1a6", "#e1e4e6"],
-        "scan": "#d8dcdf",
         "cursor": "#f0f1f2",
     },
     "light": {
@@ -64,7 +63,6 @@ PALETTES = {
         "rule": "#e1e3e4",
         "idle": "#e4e6e7",
         "levels": ["#c9ccce", "#a4a9ad", "#73797e", "#34393d"],
-        "scan": "#555c61",
         "cursor": "#202326",
     },
 }
@@ -177,12 +175,13 @@ def build_dashboard(data: dict[str, Any], username: str, theme: str) -> str:
     first_date = date.fromisoformat(days[0]["date"])
     last_date = date.fromisoformat(days[-1]["date"])
 
-    grid_left, grid_right = 74.0, 919.0
+    # Coordinates refer to each cell's left edge. Keeping the final edge at
+    # x=920 prevents the last week from being clipped by the SVG viewport.
+    grid_left, grid_right = 74.0, 908.0
     grid_top, row_step = 205.0, 10.5
     week_count = max(1, len(weeks))
     week_step = (grid_right - grid_left) / max(1, week_count - 1)
-    cell_width = min(12.4, week_step - 3.0)
-    cell_height = 6.5
+    cell_width, cell_height = 12.0, 6.5
 
     date_to_week: dict[str, int] = {}
     week_groups: list[str] = []
@@ -195,18 +194,18 @@ def build_dashboard(data: dict[str, Any], username: str, theme: str) -> str:
             count = int(day["contributionCount"])
             level = level_for(count, maximum)
             fill = colors["idle"] if level < 0 else colors["levels"][level]
-            y = grid_top + int(day["weekday"]) * row_step
+            weekday = int(day["weekday"])
+            y = grid_top + weekday * row_step
+            reveal_delay = 0.9 + week_index * 0.022 + weekday * 0.018
             latest_class = " latest-day" if day["date"] == latest_date else ""
             noun = "contribution" if count == 1 else "contributions"
             cells.append(
                 f'<rect class="day-cell{latest_class}" x="{fmt(x)}" y="{fmt(y)}" '
-                f'width="{fmt(cell_width)}" height="{fmt(cell_height)}" rx="3.25" fill="{fill}">'
+                f'width="{fmt(cell_width)}" height="{fmt(cell_height)}" rx="3.25" fill="{fill}" '
+                f'style="animation-delay:{reveal_delay:.3f}s">'
                 f'<title>{escape(day["date"])}: {count} {noun}</title></rect>'
             )
-        week_groups.append(
-            f'<g class="week" style="animation-delay:{week_index * 0.018:.3f}s">'
-            f'{"".join(cells)}</g>'
-        )
+        week_groups.append(f'<g>{"".join(cells)}</g>')
 
     month_labels: list[str] = []
     previous_month: tuple[int, int] | None = None
@@ -233,7 +232,7 @@ def build_dashboard(data: dict[str, Any], username: str, theme: str) -> str:
     stat_markup: list[str] = []
     for index, ((value, label), x) in enumerate(zip(stats, stat_positions)):
         stat_markup.append(
-            f'<g class="stat" style="animation-delay:{index * 0.08:.2f}s">'
+            f'<g class="stat" style="animation-delay:{0.35 + index * 0.12:.2f}s">'
             f'<text x="{x}" y="113" class="sans" fill="{colors["text"]}" '
             f'font-size="32" font-weight="680" letter-spacing="-0.8">{value}</text>'
             f'<text x="{x}" y="136" class="mono" fill="{colors["muted"]}" '
@@ -252,27 +251,22 @@ def build_dashboard(data: dict[str, Any], username: str, theme: str) -> str:
   <desc id="desc">{escape(description)}</desc>
   <!-- Generated from GitHub data through {days[-1]["date"]}. Do not edit by hand. -->
 
-  <defs>
-    <linearGradient id="scan" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="{colors["scan"]}" stop-opacity="0"/>
-      <stop offset="0.5" stop-color="{colors["scan"]}" stop-opacity="0.09"/>
-      <stop offset="1" stop-color="{colors["scan"]}" stop-opacity="0"/>
-    </linearGradient>
-    <clipPath id="calendarClip"><rect x="68" y="198" width="860" height="82" rx="7"/></clipPath>
-  </defs>
-
   <style>
     .mono {{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-variant-numeric: tabular-nums; }}
     .sans {{ font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-variant-numeric: tabular-nums; }}
-    .stat {{ animation: enter .45s ease-out both; }}
-    .week {{ animation: enter .32s ease-out both; }}
-    .calendar-scan {{ animation: sweep 10s 1.3s ease-in-out infinite; }}
-    .latest-day {{ stroke: {colors["cursor"]}; stroke-width: 1; animation: cursor 2.8s ease-in-out infinite; }}
-    @keyframes enter {{ from {{ opacity: 0; transform: translateY(4px); }} to {{ opacity: 1; transform: translateY(0); }} }}
-    @keyframes sweep {{ 0% {{ transform: translateX(-70px); opacity: 0; }} 12%, 82% {{ opacity: 1; }} 100% {{ transform: translateX(930px); opacity: 0; }} }}
-    @keyframes cursor {{ 0%, 100% {{ stroke-opacity: .2; }} 50% {{ stroke-opacity: .85; }} }}
+    .stat {{ animation: stat-reveal 10s cubic-bezier(.2,.8,.2,1) infinite both; }}
+    .day-cell {{ transform-box: fill-box; transform-origin: center; animation: cell-reveal 10s cubic-bezier(.2,.8,.2,1) infinite both; }}
+    .latest-day {{ stroke: {colors["cursor"]}; stroke-width: 1; }}
+    @keyframes stat-reveal {{
+      0% {{ opacity: 0; transform: translateY(7px); }}
+      7%, 100% {{ opacity: 1; transform: translateY(0); }}
+    }}
+    @keyframes cell-reveal {{
+      0% {{ opacity: 0; transform: scaleX(.12); }}
+      5%, 100% {{ opacity: 1; transform: scaleX(1); }}
+    }}
     @media (prefers-reduced-motion: reduce) {{
-      .stat, .week, .calendar-scan, .latest-day {{ animation: none; opacity: 1; transform: none; }}
+      .stat, .day-cell {{ animation: none; opacity: 1; transform: none; }}
     }}
   </style>
 
@@ -294,9 +288,8 @@ def build_dashboard(data: dict[str, Any], username: str, theme: str) -> str:
     <text x="57" y="240" text-anchor="end">WED</text>
     <text x="57" y="261" text-anchor="end">FRI</text>
   </g>
-  <g clip-path="url(#calendarClip)">
+  <g>
     {''.join(week_groups)}
-    <rect x="68" y="198" width="54" height="82" fill="url(#scan)" class="calendar-scan"/>
   </g>
 
   <text x="40" y="304" class="mono" fill="{colors["faint"]}" font-size="7.5" letter-spacing="0.7">{first_label} — {last_label}</text>
