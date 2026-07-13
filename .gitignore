@@ -1,0 +1,5 @@
+# Local design references and render checks
+Screenshot_*.png
+preview-*.png
+.dashboard-data.json
+__pycache__/

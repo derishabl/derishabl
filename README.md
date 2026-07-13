@@ -24,7 +24,23 @@ I build compact, inspectable instruments for those cases — currently around **
 
 <br>
 
-## `02 / CURRENT SIGNAL`
+## `02 / LIVE TELEMETRY`
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/stats-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/stats-light.svg">
+    <img src="./assets/stats-light.svg" width="100%" alt="Derishabl Signal Atlas — animated GitHub contribution telemetry">
+  </picture>
+</div>
+
+<p align="center">
+  <sub>UPDATED DAILY FROM GITHUB'S API &nbsp;·&nbsp; NO THIRD-PARTY STATS SERVICE</sub>
+</p>
+
+<br>
+
+## `03 / CURRENT SIGNAL`
 
 <a href="https://github.com/derishabl/retrieval-fairness">
   <picture>
@@ -50,5 +66,5 @@ I build compact, inspectable instruments for those cases — currently around **
 ---
 
 <p align="center">
-  <sub>NO DASHBOARDS ABOUT ME &nbsp;·&nbsp; I BUILD DASHBOARDS FOR THE SYSTEMS</sub>
+  <sub>THE SIGNAL IS THE WORK &nbsp;·&nbsp; EVERYTHING ELSE IS NOISE</sub>
 </p>
