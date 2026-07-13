@@ -1,5 +1,3 @@
-## Hi there 👋
-
 <!--
 **derishabl/derishabl** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
@@ -14,3 +12,10 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+<br>
+
+<!-- animated contribution graph: real data, boxes reveal cell by cell
+     (regenerated daily by .github/workflows/update-profile-art.yml) -->
+<img src="./contrib-heatmap.svg" width="860" alt="" />
+
+</div>
