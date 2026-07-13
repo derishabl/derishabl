@@ -16,6 +16,6 @@ Here are some ideas to get you started:
 
 <!-- animated contribution graph: real data, boxes reveal cell by cell
      (regenerated daily by .github/workflows/update-profile-art.yml) -->
-<img src="./contrib-heatmap.svg" width="860" alt="" />
+<img src="./github-m.svg" width="860" alt="" />
 
 </div>
