@@ -254,8 +254,8 @@ def build_dashboard(data: dict[str, Any], username: str, theme: str) -> str:
   <style>
     .mono {{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-variant-numeric: tabular-nums; }}
     .sans {{ font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-variant-numeric: tabular-nums; }}
-    .stat {{ animation: stat-reveal 10s cubic-bezier(.2,.8,.2,1) infinite both; }}
-    .day-cell {{ transform-box: fill-box; transform-origin: center; animation: cell-reveal 10s cubic-bezier(.2,.8,.2,1) infinite both; }}
+    .stat {{ animation: stat-reveal 7s cubic-bezier(.2,.8,.2,1) infinite both; }}
+    .day-cell {{ transform-box: fill-box; transform-origin: center; animation: cell-reveal 7s cubic-bezier(.2,.8,.2,1) infinite both; }}
     .latest-day {{ stroke: {colors["cursor"]}; stroke-width: 1; }}
     @keyframes stat-reveal {{
       0% {{ opacity: 0; transform: translateY(7px); }}
@@ -264,9 +264,6 @@ def build_dashboard(data: dict[str, Any], username: str, theme: str) -> str:
     @keyframes cell-reveal {{
       0% {{ opacity: 0; transform: scaleX(.12); }}
       5%, 100% {{ opacity: 1; transform: scaleX(1); }}
-    }}
-    @media (prefers-reduced-motion: reduce) {{
-      .stat, .day-cell {{ animation: none; opacity: 1; transform: none; }}
     }}
   </style>
 
