@@ -45,25 +45,6 @@ I build compact, inspectable instruments for those cases — currently around **
 </p>
 
 <br>
-
-## `03 / WORKING COORDINATES`
-
-```text
-signal/
-├── retrieval       RAG · vector search · FAISS · Qdrant · pgvector
-├── measurement     coverage · Gini · hub capture · qrels
-├── verification    pytest · regression diffs · CI gates
-└── systems         Python · C++ · CLI tooling
-```
-
-<details>
-<summary><code>smaller experiments / archive</code></summary>
-<br>
-
-- **[Praktika](https://github.com/derishabl/Praktika)** — a C++ heap-sort study with a small Windows console interface.
-
-</details>
-
 <br>
 
 ---
